@@ -7,5 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/signin', [RegisterController::class, 'index']);
-Route::post('/signin', [RegisterController::class, 'index']);
+Route::get('/signin', [RegisterController::class, 'index'])->name('register');
+Route::post('/signin', [RegisterController::class, 'store']);
