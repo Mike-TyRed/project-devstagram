@@ -12,40 +12,69 @@
         <div class="md:w-4/12  bg-white p-6 rounded-lg shadow-lg">
             <form action=" {{ route('register') }} " method="POST">
                 @csrf
+
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
                         Name
                     </label>
                     <input type="text" for="name" name="name" placeholder="Name"
-                        class="border p-3 w-full rounded-lg">
+                        class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror"
+                        value="{{ old('name') }}">
+
+                    @error('name')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                    @enderror
+
                 </div>
+
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
                         Username
                     </label>
                     <input type="text" for="username" name="username" placeholder="Username"
-                        class="border p-3 w-full rounded-lg">
+                        class="border p-3 w-full rounded-lg @error('username') border-red-500 @enderror"
+                        value="{{ old('username') }}">
+
+                    @error('username')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                    @enderror
+
                 </div>
+
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
                         Email
                     </label>
                     <input type="email" for="email" name="email" placeholder="Email"
-                        class="border p-3 w-full rounded-lg">
+                        class="border p-3 w-full rounded-lg @error('username') @enderror" value="{{ old('email') }}">
+
+                    @error('email')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                    @enderror
+
                 </div>
+
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
                         Password
                     </label>
                     <input type="password" for="password" name="password" placeholder="Password"
-                        class="border p-3 w-full rounded-lg">
+                        class="border p-3 w-full rounded-lg @error('password') @enderror" value="{{ old('password') }}">
+
+                    @error('password')
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                    @enderror
+
                 </div>
+
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
                         Confirmation password
                     </label>
                     <input type="password" for="password_confirmation" name="password_confirmation"
-                        placeholder="Confirmation password" class="border p-3 w-full rounded-lg">
+                        placeholder="Confirmation password"
+                        class="border p-3 w-full rounded-lg">
+
                 </div>
 
                 <input type="submit" value="Sign In"
