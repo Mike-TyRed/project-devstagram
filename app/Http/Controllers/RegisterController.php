@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 
 class RegisterController extends Controller
@@ -21,6 +24,24 @@ class RegisterController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        return ;
+        User::create([
+            'name' => $request->name,
+            'username' => Str::slug($request->username),
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        //Autenticar usuario
+        // auth()->attempt([
+        //     'email' => $request->email,
+        //     'password' => $request->password
+        // ]);
+
+        //Autenticar usuario V2
+        auth()->attempt($request->only('email', 'password'));
+
+
+        //Redireccionar
+        return redirect()->route('posts.index');
     }
 }
