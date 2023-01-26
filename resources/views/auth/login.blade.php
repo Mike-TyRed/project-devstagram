@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Log In
+    Welcome to DevStagram
 @endsection
 
 @section('content')
@@ -10,8 +10,12 @@
             <img src="{{ asset('img/login.jpg') }}" alt="image user login">
         </div>
         <div class="md:w-4/12  bg-white p-6 rounded-lg shadow-lg">
-            <form  novalidate>
+            <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf
+
+                @if (session('message'))
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ session('message') }}</p>
+                @endif
 
                 <div class="mb-5">
                     <label class="mb-2 block uppercase text-gray-500 font-bold">
@@ -37,6 +41,10 @@
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
 
+                </div>
+
+                <div class="mb-5">
+                    <input type="checkbox" name="remember"> <label class="text-gray-500">Remember me</label> 
                 </div>
 
                 <input type="submit" value="Log in"
