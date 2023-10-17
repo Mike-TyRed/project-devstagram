@@ -72,8 +72,7 @@
                         Confirmation password
                     </label>
                     <input type="password" for="password_confirmation" name="password_confirmation"
-                        placeholder="Confirmation password"
-                        class="border p-3 w-full rounded-lg">
+                        placeholder="Confirmation password" class="border p-3 w-full rounded-lg">
 
                 </div>
 

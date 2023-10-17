@@ -40,8 +40,7 @@
                     </label>
                     <textarea id="description" name="description" placeholder="description"
                         class="border p-3 w-full rounded-lg @error('description') border-red-500 @enderror">
-                        {{ old('description') }}
-                    </textarea>
+                        {{ old('description') }}</textarea>
 
                     @error('description')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
@@ -49,16 +48,14 @@
                 </div>
 
                 <div class="mb-5">
-                    <input
-                        name="image" type="hidden" value="{{old('image')}}"
-                    />
+                    <input name="image" type="hidden" value="{{ old('image') }}" />
                     @error('image')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <input type="submit" value="Save"
-                    class="bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
+                    class="bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg" />
 
             </form>
         </div>

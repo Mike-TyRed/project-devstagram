@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth']);
+        $this->middleware(['auth'])->except(['show', 'index']);
     }
     public function index(User $user)
     {
@@ -59,10 +60,13 @@ class PostController extends Controller
         return redirect()->route('posts.index', auth()->user()->username)->with('success', 'Post created successfully!');
     }
 
-    public function show(Post $post)
+    public function show(User $user, Post $post)
     {
         //Mostrar un post
-        return view('posts.show');
+        return view('posts.show', [
+            'post' => $post,
+            'user' => $user,
+        ]);
     }
 
     public function edit(Post $post)
@@ -77,6 +81,22 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+        //eliminar un post opcion 1
+        // if($post->user_id === auth()->user()->id){
+        //     dd('Usuario correcto');
+        // }else{
+        //     dd('Usuario incorrecto');
+        // }
+
+        //Opcion 2
+        $this->authorize('delete', $post);
+        $post->delete();
+
+        //Eliminar imagen
+        $img_path = public_path('uploads/'.$post->image);
+        if(File::exists($img_path)){
+            unlink($img_path);
+        }
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }
